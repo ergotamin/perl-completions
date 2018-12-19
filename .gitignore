@@ -4,7 +4,7 @@
 !LICENSE
 !README.md
 !package.json
-!static/**
-!src/**
+!static
+!src
 node_modules
 package-lock.json
