@@ -24,17 +24,17 @@ export function activate(context: ExtensionContext) {
 	// Options of the language client
 	let clientOptions: LanguageClientOptions = {
 		// Activate the server for DOT files
-		documentSelector: ['dot'],
+		documentSelector: ['perl'],
 		synchronize: {
 			// Synchronize the section 'dotLanguageServer' of the settings to the server
-			configurationSection: 'dotLanguageServer',
+			configurationSection: 'perlLanguageServer',
 			// Notify the server about file changes to '.clientrc files contained in the workspace
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		}
 	}
 	
 	// Create the language client and start the client.
-	let disposable = new LanguageClient('dotLanguageServer', 'Language Server', serverOptions, clientOptions).start();
+	let disposable = new LanguageClient('perlLanguageServer', 'Language Server', serverOptions, clientOptions).start();
 	
 	// Push the disposable to the context's subscriptions so that the 
 	// client can be deactivated on extension deactivation
