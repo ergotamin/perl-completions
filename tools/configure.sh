@@ -6,7 +6,6 @@ case ${1} in
     pushd ./src/types &>/dev/zero \
       || exit 1
     npm install \
-      && npm run configure \
       && npm run make:all \
       && rm -rf ./{.git,node_modules,src,out,index.js,package*} \
       && mv index.d.ts ../server-interface.d.ts
@@ -20,7 +19,6 @@ case ${1} in
     pushd ./out/interface \
       || exit 1
     npm install \
-      && npm run config \
       && npm run make:node \
       && npm run make:install \
       && npm run make:clean \
