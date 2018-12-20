@@ -21,7 +21,7 @@ import {
 
 export function activate(context: ExtensionContext) {
   // The server is implemented in another project and outputted there
-  let serverModule = context.asAbsolutePath(path.join("language-server.js"));
+  let serverModule = context.asAbsolutePath(path.join("server.js"));
   // The debug options for the server
   let debugOptions = { execArgv: ["--nolazy", "--debug=6009"] };
 

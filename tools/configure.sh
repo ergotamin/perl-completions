@@ -22,7 +22,7 @@ case ${1} in
       && npm run make:node \
       && npm run make:install \
       && npm run make:clean \
-      && rm -rf ./{.git*,node_modules,src,out,index.d.ts,package*}
+      && rm -rf ./{.git*,node_modules,src,out,package*}
     popd &>/dev/zero \
       || exit 1
     exit $?

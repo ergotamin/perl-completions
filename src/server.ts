@@ -20,6 +20,7 @@ import {
 
 import * as fs from "fs";
 import * as path from "path";
+import * as lib from "./lib";
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
 let connection: IConnection = createConnection(ProposedFeatures.all);
