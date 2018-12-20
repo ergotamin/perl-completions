@@ -25,7 +25,7 @@
   "activationEvents": [
     "onLanguage:perl"
   ],
-  "main": "./out/extension",
+  "main": "./out/client",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -50,9 +50,10 @@
     }
   },
   "scripts": {
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "vscode:prepublish": "tsc -p ./",
-    "compile": "tsc -p ./"
+    "configure": "./tools/configure.sh",
+    "compile": "tsc -p ./",
+    "vscode:prepublish": "(npm run configure -- precompile && npm run compile)",
+    "vscode:postinstall": "(npm run configure -- postinstall && echo \"ServerModule installed !\")"
   },
   "devDependencies": {
     "@types/node": "^6.0.52",
