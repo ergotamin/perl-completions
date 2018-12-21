@@ -31,10 +31,10 @@
       "type": "object",
       "title": "Perl-LanguageServer - client configuration",
       "properties": {
-        "perlLanguageServer.maxNumberOfProblems": {
+        "perlLanguageServer.maxNumberOfSymbols": {
           "type": "number",
-          "default": 100,
-          "description": "Controls the maximum number of problems produced by the server."
+          "default": 75,
+          "description": "Controls the maximum number of completion-symbols returned by the server."
         },
         "perlLanguageServer.trace.server": {
           "type": "string",
@@ -64,7 +64,6 @@
   "dependencies": {
     "nbind": "^0.3.15",
     "vscode-languageserver": "^3.5.1",
-    "vscode-languageclient": "^3.1.0",
-    "request": "^2.81.0"
+    "vscode-languageclient": "^3.1.0"
   }
 }

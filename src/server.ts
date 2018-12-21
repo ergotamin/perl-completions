@@ -41,17 +41,17 @@ let workspaceRoot: string;
 
 // The settings interface describe the server relevant settings part
 interface Settings {
-  dotLanguageServer: DotSettings;
+  perlLanguageServer: PerlSettings;
 }
 
 // These are the example settings we defined in the client's package.json
 // file
-interface DotSettings {
-  maxNumberOfProblems: number;
+interface PerlSettings {
+  maxNumberOfSymbols: number;
 }
 
-// hold the maxNumberOfProblems setting
-let maxNumberOfProblems: number;
+// hold the maxNumberOfSymbols setting
+let maxNumberOfSymbols: number;
 
 // hold a list of colors and shapes for the completion provider
 let colors: Array<string>;
@@ -70,7 +70,7 @@ connection.onInitialize(
         // Tell the client that the server support code complete
         completionProvider: {
           resolveProvider: true,
-          triggerCharacters: ["="]
+          triggerCharacters: [":"]
         },
         hoverProvider: true
       }
@@ -82,7 +82,7 @@ connection.onInitialize(
 // as well.
 connection.onDidChangeConfiguration(change => {
   let settings = <Settings>change.settings;
-  maxNumberOfProblems = settings.dotLanguageServer.maxNumberOfProblems || 100;
+  maxNumberOfSymbols = settings.perlLanguageServer.maxNumberOfSymbols || 100;
   // Revalidate any open text documents
   documents.all().forEach(validateDotDocument);
 });
@@ -111,7 +111,7 @@ function validateDotDocument(textDocument: TextDocument): void {
 
       for (
         var i = 0;
-        i < messages.length && problems < maxNumberOfProblems;
+        i < messages.length && problems < maxNumberOfSymbols;
         i++
       ) {
         problems++;

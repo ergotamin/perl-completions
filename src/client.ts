@@ -1,9 +1,10 @@
 "use strict";
 
-import * as path from "path";
 import * as fs from "fs";
+import * as path from "path";
+import * as cproc from "child_process";
 
-import { workspace, Disposable, ExtensionContext } from "vscode";
+import { window, workspace, Disposable, ExtensionContext } from "vscode";
 import {
   LanguageClient,
   LanguageClientOptions,
@@ -20,13 +21,19 @@ import {
 } from "vscode-languageclient";
 
 export function activate(context: ExtensionContext) {
-  // The server is implemented in another project and outputted there
-  let serverModule = context.asAbsolutePath(path.join("server.js"));
-  // The debug options for the server
+  let serverModule = path.join(context.extensionPath, "/out", "/server.js");
+  let subModule = path.join(context.extensionPath, "/out", "/lib");
+
+  if (fs.existsSync(subModule) === false) {
+    let cmd = path.join(context.extensionPath, "/tools", "/configure.sh");
+    window.showInformationMessage(
+      "First start of Perl-LanguageServer... started downloading module !"
+    );
+    cproc.execFileSync(cmd, ["postinstall"]);
+  }
+
   let debugOptions = { execArgv: ["--nolazy", "--debug=6009"] };
 
-  // If the extension is launched in debug mode then the debug server options are used
-  // Otherwise the  normal ones are used
   let serverOptions: ServerOptions = {
     run: { module: serverModule, transport: TransportKind.ipc },
     debug: {
@@ -36,19 +43,13 @@ export function activate(context: ExtensionContext) {
     }
   };
 
-  // Options of the language client
   let clientOptions: LanguageClientOptions = {
-    // Activate the server for DOT files
     documentSelector: ["perl"],
     synchronize: {
-      // Synchronize the section 'dotLanguageServer' of the settings to the server
-      configurationSection: "perlLanguageServer",
-      // Notify the server about file changes to '.clientrc files contained in the workspace
-      fileEvents: workspace.createFileSystemWatcher("**/.clientrc")
+      configurationSection: "perlLanguageServer"
     }
   };
 
-  // Create the language client and start the client.
   let disposable = new LanguageClient(
     "perlLanguageServer",
     "Language Server",
@@ -56,7 +57,5 @@ export function activate(context: ExtensionContext) {
     clientOptions
   ).start();
 
-  // Push the disposable to the context's subscriptions so that the
-  // client can be deactivated on extension deactivation
   context.subscriptions.push(disposable);
 }
