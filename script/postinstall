@@ -1,0 +1,19 @@
+#!/bin/bash
+EXTENSION_PATH=$($(command -v dirname) "$(dirname ${0})")
+NODE_VERSION=${1}
+pushd "${EXTENSION_PATH}" &>/dev/zero \
+  || exit 1
+git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/perl-completions-cpp-node.git' ./tmp \
+  || exit 1
+pushd ./tmp \
+  || exit 1
+npm install \
+  && npm run make:node -- --target=${NODE_VERSION} \
+  && npm run make:install \
+  && mv ./nbind.node ./../out/cpp/nbind.node
+popd &>/dev/zero \
+  || exit 1
+  rm -rf ./tmp
+popd &>/dev/zero \
+  || exit 1
+exit $?

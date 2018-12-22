@@ -6,18 +6,22 @@ import * as cproc from "child_process";
 // vscode
 import * as vscode from "vscode";
 
-export function activate(context: vscode.ExtensionContext) {
-  let cppModule = path.join(context.extensionPath, "/out", "/lib");
-
-  if (fs.existsSync(cppModule) === false) {
-    let cmd = path.join(context.extensionPath, "/tools", "/configure.sh");
+function checkinstall(dir) {
+  let module = path.join(dir, "/out", "/cpp", "/nbind.node");
+  if (fs.existsSync(module) === false) {
+    let cmd = path.join(dir, "/script", "/postinstall");
     vscode.window.showInformationMessage(
-      "First start of Perl-Completions... started downloading module !"
+      "Perl-Completions: Downloading/Compiling Node-Module !"
     );
-    cproc.execFileSync(cmd, ["postinstall"]);
+    cproc.execFileSync(cmd, [process.version]);
   }
+  return;
+}
 
-  const cpp = require("./cpp.node");
+export function activate(context: vscode.ExtensionContext) {
+  checkinstall(context.extensionPath);
+
+  const cpp = require("./cpp").lib;
 
   let functionProvider = vscode.languages.registerCompletionItemProvider(
     "perl",
@@ -30,24 +34,23 @@ export function activate(context: vscode.ExtensionContext) {
       ) {
         let items = new Array<vscode.CompletionItem>();
 
-        cpp.Perl.functions().forEach((name, idx, array) => {
+        cpp.Perl.functions().forEach(name => {
           let item = new vscode.CompletionItem(
             name,
             vscode.CompletionItemKind.Function
           );
-          item.detail = "function";
+          item.detail = "builtin function";
           item.commitCharacters = ["\t"];
-          if (name.startsWith("-")) {
-            item.documentation = new vscode.MarkdownString(
-              "Press `TAB` to get **" + name + "**"
-            );
-            item.insertText = new vscode.SnippetString(name + " ");
-          } else {
-            item.documentation = new vscode.MarkdownString(
-              "Press `TAB` to get **" + name + "**(...)"
-            );
-            item.insertText = new vscode.SnippetString(name + "(${1})");
-          }
+
+          item.documentation = new vscode.MarkdownString(
+            "[about:_" +
+              name +
+              "_](http://perldoc.perl.org/functions/" +
+              name +
+              ".html)"
+          );
+          item.insertText = new vscode.SnippetString(name);
+
           items.push(item);
         });
 
@@ -73,12 +76,12 @@ export function activate(context: vscode.ExtensionContext) {
             name,
             vscode.CompletionItemKind.Variable
           );
-          item.detail = "variable";
+          item.detail = "builtin variable";
           item.commitCharacters = ["\t"];
           item.documentation = new vscode.MarkdownString(
-            "Press `TAB` to get **" + name + "**"
+            "[about:_" + name + "_](http://perldoc.perl.org/perlvar.html)"
           );
-          item.insertText = new vscode.SnippetString(name + " ");
+          item.insertText = new vscode.SnippetString(name);
           items.push(item);
         });
 
@@ -102,17 +105,12 @@ export function activate(context: vscode.ExtensionContext) {
           name,
           vscode.CompletionItemKind.Keyword
         );
-        if (name.startsWith("_")) {
-          item.documentation = new vscode.MarkdownString(
-            "Press `TAB` to get **" + name + "**"
-          );
-          item.insertText = new vscode.SnippetString(name);
-        } else {
-          item.documentation = new vscode.MarkdownString(
-            "Press `TAB` to get **" + name + "**(...)"
-          );
-          item.insertText = new vscode.SnippetString(name + "(${1})");
-        }
+        item.detail = "builtin syntax";
+        item.commitCharacters = ["\t"];
+        item.documentation = new vscode.MarkdownString(
+          "[about:_" + name + "_](http://perldoc.perl.org/perlop.html)"
+        );
+        item.insertText = new vscode.SnippetString(name);
         items.push(item);
       });
 
@@ -133,13 +131,11 @@ export function activate(context: vscode.ExtensionContext) {
       cpp.Perl.constants().forEach(name => {
         let item = new vscode.CompletionItem(
           name,
-          vscode.CompletionItemKind.Constant
+          vscode.CompletionItemKind.File
         );
-        item.detail = "I/O constant";
+        item.detail = "filehandle";
         item.commitCharacters = ["\t"];
-        item.documentation = new vscode.MarkdownString(
-          "Press `TAB` to get **" + name + "**"
-        );
+        item.documentation = new vscode.MarkdownString("_" + name + "_");
         item.insertText = new vscode.SnippetString(name);
         items.push(item);
       });

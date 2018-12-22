@@ -26,10 +26,9 @@
   ],
   "main": "./out/extension",
   "scripts": {
-    "configure": "./tools/configure.sh",
+    "configure": "./script/postinstall",
     "compile": "tsc -p ./",
-    "vscode:prepublish": "(npm run configure -- precompile && npm run compile)",
-    "vscode:postinstall": "(npm run configure -- postinstall && echo \"ServerModule installed !\")"
+    "vscode:prepublish": "npm run compile"
   },
   "devDependencies": {
     "@types/node": "^6.0.52",
