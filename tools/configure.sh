@@ -1,7 +1,7 @@
 #!/bin/bash
 case ${1} in
   precompile)
-    git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/perl-language-server-cpp-node.git' ./src/types \
+    git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/perl-completions-cpp-node.git' ./src/types \
       || exit 1
     pushd ./src/types &>/dev/zero \
       || exit 1
@@ -9,7 +9,7 @@ case ${1} in
       && npm run make:all
     popd &>/dev/zero \
       || exit 1
-    mv ./src/types/{index.d.ts,../lib.d.ts}
+    mv ./src/types/{index.d.ts,../cpp.d.ts}
     rm -rf ./src/types
     exit ${?}
     ;;
@@ -17,9 +17,9 @@ case ${1} in
     EXTENSION_PATH=$($(command -v dirname) "$(dirname ${0})")
     pushd "${EXTENSION_PATH}" &>/dev/zero \
       || exit 1
-    git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/perl-language-server-cpp-node.git' ./out/lib \
+    git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/perl-completions-cpp-node.git' ./out/cpp \
       || exit 1
-    pushd ./out/lib \
+    pushd ./out/cpp \
       || exit 1
     npm install \
       && npm run make:node \

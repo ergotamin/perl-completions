@@ -1,6 +1,6 @@
 {
-  "name": "vscode-perl-language-server",
-  "description": "VSCode-LanguageServer implementation for Perl",
+  "name": "perl-completions",
+  "description": "VSCode Completions Provider for Perl-Language",
   "icon": "static/icon.png",
   "publisher": "ergotamin",
   "author": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ergotamin/vscode-perl-language-server"
+    "url": "https://github.com/ergotamin/perl-completions"
   },
   "license": "MIT",
   "version": "0.0.1",
@@ -19,36 +19,12 @@
     "node": "*"
   },
   "categories": [
-    "Other",
-    "Programming Languages"
+    "Other"
   ],
   "activationEvents": [
     "onLanguage:perl"
   ],
   "main": "./out/client",
-  "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Perl-LanguageServer - client configuration",
-      "properties": {
-        "perlLanguageServer.maxNumberOfSymbols": {
-          "type": "number",
-          "default": 75,
-          "description": "Controls the maximum number of completion-symbols returned by the server."
-        },
-        "perlLanguageServer.trace.server": {
-          "type": "string",
-          "enum": [
-            "off",
-            "messages",
-            "verbose"
-          ],
-          "default": "off",
-          "description": "Traces the communication between VSCode and the perlLanguageServer service."
-        }
-      }
-    }
-  },
   "scripts": {
     "configure": "./tools/configure.sh",
     "compile": "tsc -p ./",
@@ -58,12 +34,9 @@
   "devDependencies": {
     "@types/node": "^6.0.52",
     "typescript": "^2.1.5",
-    "vscode": "^1.0.3",
-    "vscode-languageserver-types": "^3.14.0"
+    "vscode": "^1.0.3"
   },
   "dependencies": {
-    "nbind": "^0.3.15",
-    "vscode-languageserver": "^3.5.1",
-    "vscode-languageclient": "^3.1.0"
+    "nbind": "^0.3.15"
   }
 }
