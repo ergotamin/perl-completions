@@ -7,8 +7,7 @@ case ${1} in
       || exit 1
     npm install \
       && npm run make:all \
-      && npm run make:clean \
-      && rm -f node.lib
+      && rm -rf ./{node_modules,out,src,package*,.git*}
     popd &>/dev/zero \
       || exit 1
     mv ./tmp ./src/cpp.node

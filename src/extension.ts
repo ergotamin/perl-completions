@@ -5,8 +5,6 @@ import * as path from "path";
 import * as cproc from "child_process";
 // vscode
 import * as vscode from "vscode";
-// local
-import * as cpp from "./cpp.node";
 
 export function activate(context: vscode.ExtensionContext) {
   let cppModule = path.join(context.extensionPath, "/out", "/lib");
@@ -18,6 +16,8 @@ export function activate(context: vscode.ExtensionContext) {
     );
     cproc.execFileSync(cmd, ["postinstall"]);
   }
+
+  const cpp = require("./cpp.node");
 
   let functionProvider = vscode.languages.registerCompletionItemProvider(
     "perl",
