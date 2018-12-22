@@ -24,7 +24,7 @@ case ${1} in
     npm install \
       && npm run make:node \
       && npm run make:install \
-      && mv ./node.lib ./../out/cpp.node/node.lib
+      && mv ./nbind.node ./../out/cpp.node/nbind.node
     popd &>/dev/zero \
       || exit 1
       rm -rf ./tmp
