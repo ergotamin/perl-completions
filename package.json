@@ -22,9 +22,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:perl"
+    "*"
   ],
-  "main": "./out/client",
+  "main": "./out/extension",
   "scripts": {
     "configure": "./tools/configure.sh",
     "compile": "tsc -p ./",

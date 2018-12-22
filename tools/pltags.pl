@@ -4,7 +4,7 @@
 # $Revision: 1.7 $
 # TODO
 # * figure out a way to avoid running BEGIN blocks
-
+ 
 use strict;
 use File::Find;
 use Getopt::Std;
