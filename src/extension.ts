@@ -41,10 +41,8 @@ export function activate(context: vscode.ExtensionContext) {
           );
           item.detail = "perlfunc";
           item.commitCharacters = ["\t"];
-
           item.documentation = elem[1];
           item.insertText = elem[0];
-
           items.push(item);
         });
 
@@ -65,17 +63,15 @@ export function activate(context: vscode.ExtensionContext) {
       ) {
         let items = new Array<vscode.CompletionItem>();
 
-        cpp.Perl.variables().forEach(name => {
+        cpp.Perl.variables().forEach(elem => {
           let item = new vscode.CompletionItem(
-            name,
+            elem[0],
             vscode.CompletionItemKind.Variable
           );
-          item.detail = "builtin variable";
+          item.detail = "perlvar";
           item.commitCharacters = ["\t"];
-          item.documentation = new vscode.MarkdownString(
-            "[about:_" + name + "_](http://perldoc.perl.org/perlvar.html)"
-          );
-          item.insertText = new vscode.SnippetString(name);
+          item.documentation = elem[1];
+          item.insertText = elem[0];
           items.push(item);
         });
 
