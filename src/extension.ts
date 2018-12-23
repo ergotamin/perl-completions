@@ -34,22 +34,16 @@ export function activate(context: vscode.ExtensionContext) {
       ) {
         let items = new Array<vscode.CompletionItem>();
 
-        cpp.Perl.functions().forEach(name => {
+        cpp.Perl.functions().forEach(elem => {
           let item = new vscode.CompletionItem(
-            name,
+            elem[0],
             vscode.CompletionItemKind.Function
           );
-          item.detail = "builtin function";
+          item.detail = "perlfunc";
           item.commitCharacters = ["\t"];
 
-          item.documentation = new vscode.MarkdownString(
-            "[about:_" +
-              name +
-              "_](http://perldoc.perl.org/functions/" +
-              name +
-              ".html)"
-          );
-          item.insertText = new vscode.SnippetString(name);
+          item.documentation = elem[1];
+          item.insertText = elem[0];
 
           items.push(item);
         });
@@ -91,64 +85,5 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  let syntaxProvider = vscode.languages.registerCompletionItemProvider("perl", {
-    provideCompletionItems(
-      document: vscode.TextDocument,
-      position: vscode.Position,
-      token: vscode.CancellationToken,
-      context: vscode.CompletionContext
-    ) {
-      let items = new Array<vscode.CompletionItem>();
-
-      cpp.Perl.syntax().forEach(name => {
-        let item = new vscode.CompletionItem(
-          name,
-          vscode.CompletionItemKind.Keyword
-        );
-        item.detail = "builtin syntax";
-        item.commitCharacters = ["\t"];
-        item.documentation = new vscode.MarkdownString(
-          "[about:_" + name + "_](http://perldoc.perl.org/perlop.html)"
-        );
-        item.insertText = new vscode.SnippetString(name);
-        items.push(item);
-      });
-
-      let list = new vscode.CompletionList(items, false);
-      return list;
-    }
-  });
-
-  let handleProvider = vscode.languages.registerCompletionItemProvider("perl", {
-    provideCompletionItems(
-      document: vscode.TextDocument,
-      position: vscode.Position,
-      token: vscode.CancellationToken,
-      context: vscode.CompletionContext
-    ) {
-      let items = new Array<vscode.CompletionItem>();
-
-      cpp.Perl.constants().forEach(name => {
-        let item = new vscode.CompletionItem(
-          name,
-          vscode.CompletionItemKind.File
-        );
-        item.detail = "filehandle";
-        item.commitCharacters = ["\t"];
-        item.documentation = new vscode.MarkdownString("_" + name + "_");
-        item.insertText = new vscode.SnippetString(name);
-        items.push(item);
-      });
-
-      let list = new vscode.CompletionList(items, false);
-      return list;
-    }
-  });
-
-  context.subscriptions.push(
-    functionProvider,
-    variableProvider,
-    syntaxProvider,
-    handleProvider
-  );
+  context.subscriptions.push(functionProvider, variableProvider);
 }
