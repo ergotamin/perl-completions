@@ -34,14 +34,16 @@ export function activate(context: vscode.ExtensionContext) {
       ) {
         let items = new Array<vscode.CompletionItem>();
 
-        cpp.Perl.functions().forEach(elem => {
+        cpp.Perl.functions().forEach((elem: Array<string>) => {
           let item = new vscode.CompletionItem(
             elem[0],
             vscode.CompletionItemKind.Function
           );
-          item.detail = "perlfunc";
+          item.detail = "builtin";
           item.commitCharacters = ["\t"];
-          item.documentation = elem[1];
+          item.documentation = new vscode.MarkdownString()
+            .appendCodeblock(elem[1], "perl")
+            .appendMarkdown(elem[2]);
           item.insertText = elem[0];
           items.push(item);
         });
@@ -63,14 +65,16 @@ export function activate(context: vscode.ExtensionContext) {
       ) {
         let items = new Array<vscode.CompletionItem>();
 
-        cpp.Perl.variables().forEach(elem => {
+        cpp.Perl.variables().forEach((elem: Array<string>) => {
           let item = new vscode.CompletionItem(
             elem[0],
             vscode.CompletionItemKind.Variable
           );
-          item.detail = "perlvar";
+          item.detail = "variable";
           item.commitCharacters = ["\t"];
-          item.documentation = elem[1];
+          item.documentation = new vscode.MarkdownString()
+            .appendCodeblock(elem[1], "perl")
+            .appendMarkdown(elem[2]);
           item.insertText = elem[0];
           items.push(item);
         });
