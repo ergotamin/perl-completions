@@ -1,7 +1,7 @@
 {
   "name": "perl-completions",
   "description": "Completions Provider for Perl-Language",
-  "icon": "./static/icon.png",
+  "icon": "static/icon.png",
   "publisher": "ergotamin",
   "author": {
     "name": "Marcel Bobolz",
