@@ -1,6 +1,6 @@
 {
   "name": "perl-completions",
-  "description": "VSCode Completions Provider for Perl-Language",
+  "description": "Completions Provider for Perl-Language",
   "icon": "./static/icon.png",
   "publisher": "ergotamin",
   "author": {
@@ -10,16 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ergotamin/perl-completions"
+    "url": "https://github.com/ergotamin/vscode-perl-completions.git"
   },
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "engines": {
     "vscode": "^1.8.0",
     "node": "*"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Programming Languages"
   ],
   "activationEvents": [
     "*"
