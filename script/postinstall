@@ -3,7 +3,7 @@ EXTENSION_PATH=$($(command -v dirname) "$(dirname ${0})")
 NODE_VERSION=${1}
 pushd "${EXTENSION_PATH}" &>/dev/zero \
   || exit 1
-git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/perl-completions-cpp-node.git' ./tmp \
+git clone --single-branch --depth 2 --ipv4 'https://github.com/ergotamin/vscode-perl-completions-module.git' ./tmp \
   || exit 1
 pushd ./tmp \
   || exit 1

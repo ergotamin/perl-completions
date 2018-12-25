@@ -9,10 +9,10 @@ import * as vscode from "vscode";
 function checkinstall(dir) {
   let module = path.join(dir, "/out", "/cpp", "/nbind.node");
   if (fs.existsSync(module) === false) {
-    let cmd = path.join(dir, "/script", "/postinstall");
     vscode.window.showInformationMessage(
       "Perl-Completions: Downloading/Compiling Node-Module !"
     );
+    let cmd = path.join(dir, "/script", "/postinstall");
     cproc.execFileSync(cmd, [process.version]);
   }
   return;

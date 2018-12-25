@@ -1,13 +1,28 @@
-# README
-## This is the README for your extension "vscode" 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+<h1><u>Perl-Completions</u>
+<h6>Completion Provider for Perl.</h6>
+</h1>
+<br />
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
+### <u>What you will get</u>
 
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+<p>Basic completions for perl-builtins, with simple usage information</p>
 
-** Enjoy!**
+---
+
+### <u> How it works </u>
+
+<p>1.  Install the extension</p>
+<p>2.  Restart VSCode</p>
+<p>3.  Open a 'perl' Document and type something.</p>
+<p>4.  You're done! enjoy...</p>
+
+---
+
+<small>
+<p>feel free to browse through the other stuff/extensions:</p>
+<p><a href="https://github.com/ergotamin">Click...</a></p>
+</small>
+</em>
+</b>
+
+---
