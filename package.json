@@ -13,7 +13,7 @@
     "url": "https://github.com/ergotamin/vscode-perl-completions.git"
   },
   "license": "MIT",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.8.0",
     "node": "*"
