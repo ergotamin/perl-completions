@@ -1,5 +1,6 @@
 {
   "name": "perl-completions",
+  "displayName": "Perl-Completions",
   "description": "Completions Provider for Perl-Language",
   "icon": "static/icon.png",
   "publisher": "ergotamin",
